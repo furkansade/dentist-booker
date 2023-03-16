@@ -9,8 +9,8 @@ exports.getAppointmentsPage = async (req, res) => {
   });
 };
 exports.getDepartmentsPage = async (req, res) => {
-  res.status(200).render("admin/deparments", {
-    pageName: "deparments",
+  res.status(200).render("admin/departments", {
+    pageName: "departments",
   });
 };
 exports.getDoctorsPage = async (req, res) => {
