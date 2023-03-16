@@ -45,14 +45,15 @@
                 </tr>
               </thead>
               <tbody>
+                <% for(let i=0; i < doctors.length; i++) { %>
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row"><%= doctors[i].doctorTC %></th>
                   <td><img src="./assets/img/profile-img.jpg" alt="" width="80px"></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><%= doctors[i].firstName %> <%= doctors[i].lastName %></td>
+                  <td><%= doctors[i].department %></td>
+                  <td><%= doctors[i].phone %></td>
                   <td>
-                    <a data-bs-target="#updateDoctorID" data-bs-toggle="modal" class="btn btn-outline-warning">
+                    <a data-bs-target="#updateDoctor<%= doctors[i]._id %>" data-bs-toggle="modal" class="btn btn-outline-warning">
                       <i class="bi bi-pen"></i>
                     </a>
                     <a class="btn btn-outline-danger">
@@ -60,64 +61,65 @@
                     </a>
                   </td>
                 </tr>
-                 <!-- UPDATE DOCTOR -->
-                <div class="modal fade" id="updateDoctorID" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Update Doctor</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="">
-                          <div class="form-group mt-3">
-                            <div class="row">
-                              <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="Doctor First Name">
-                              </div>
-                              <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="Doctor First Name">
-                              </div>
-                              <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="Doctor Phone" maxlength="10">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group mt-3">
-                            <select class="form-select" name="" id="">
-                              <option value="">Endo</option>
-                              <option value="">Endo</option>
-                            </select>
-                          </div>
-                          <div class="form-group mt-3">
-                            <input type="file" class="form-control">
-                            <small>Doctor Photo</small>
-                          </div>
-                          <div class="form-group mt-3">
-                            <textarea name="" id="" class="form-control" placeholder="Doctor About"></textarea>
-                          </div>
-                          <div class="form-group mt-3">
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="Doctor Linkedin">
-                                <small>www.linkedin.com/in/...</small>
-                              </div>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="Doctor Instagram">
-                                <small>www.instagram.com/...</small>
-                              </div>
-                            </div>
-                          </div>
+                <!-- UPDATE DOCTOR -->
+               <div class="modal fade" id="updateDoctor<%= doctors[i]._id %>" tabindex="-1">
+                 <div class="modal-dialog modal-dialog-centered modal-lg">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <h5 class="modal-title">Update Doctor</h5>
+                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                       <form action="">
+                         <div class="form-group mt-3">
+                           <div class="row">
+                             <div class="col-sm-4">
+                               <input type="text" class="form-control" placeholder="Doctor First Name" value="<%= doctors[i].firstName %>">
+                             </div>
+                             <div class="col-sm-4">
+                               <input type="text" class="form-control" placeholder="Doctor Last Name" value="<%= doctors[i].lastName%>">
+                             </div>
+                             <div class="col-sm-4">
+                               <input type="text" class="form-control" placeholder="Doctor Phone" maxlength="10" value="<%= doctors[i].phone %>">
+                             </div>
+                           </div>
+                         </div>
+                         <div class="form-group mt-3">
+                           <select class="form-select" name="" id="">
+                             <option value="">Endo</option>
+                             <option value="">Endo</option>
+                           </select>
+                         </div>
+                         <div class="form-group mt-3">
+                           <input type="file" class="form-control">
+                           <small>Doctor Photo</small>
+                         </div>
+                         <div class="form-group mt-3">
+                           <textarea name="" id="" class="form-control" placeholder="Doctor About"><%= doctors[i].about %></textarea>
+                         </div>
+                         <div class="form-group mt-3">
+                           <div class="row">
+                             <div class="col-sm-6">
+                               <input type="text" class="form-control" placeholder="Doctor Linkedin" value="<%= doctors[i].linkedinURL %>">
+                               <small>www.linkedin.com/in/...</small>
+                             </div>
+                             <div class="col-sm-6">
+                               <input type="text" class="form-control" placeholder="Doctor Instagram" value="<%= doctors[i].instagramURL %>">
+                               <small>www.instagram.com/...</small>
+                             </div>
+                           </div>
+                         </div>
 
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                       </form>
+                     </div>
+                     <div class="modal-footer">
+                       <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
+                       <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+                <% } %>
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
@@ -138,44 +140,42 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form method="POST" action="/doctors">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Doctor TC" maxlength="11">
+              <input type="text" class="form-control" name="doctorTC" placeholder="Doctor TC" maxlength="11">
             </div>
             <div class="form-group mt-3">
               <div class="row">
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Doctor First Name">
+                  <input type="text" class="form-control" name="firstName" placeholder="Doctor First Name">
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Doctor First Name">
+                  <input type="text" class="form-control" name="lastName" placeholder="Doctor Last Name">
                 </div>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Doctor Phone" maxlength="10">
+                  <input type="text" class="form-control" name="phone" placeholder="Doctor Phone" maxlength="10">
                 </div>
               </div>
             </div>
             <div class="form-group mt-3">
-              <select class="form-select" name="" id="">
-                <option value="">Endo</option>
-                <option value="">Endo</option>
+              <select class="form-select" name="department" id="">
               </select>
             </div>
             <div class="form-group mt-3">
-              <input type="file" class="form-control">
+              <input type="file" name="photo" class="form-control">
               <small>Doctor Photo</small>
             </div>
             <div class="form-group mt-3">
-              <textarea name="" id="" class="form-control" placeholder="Doctor About"></textarea>
+              <textarea name="about" id="" class="form-control" placeholder="Doctor About"></textarea>
             </div>
             <div class="form-group mt-3">
               <div class="row">
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" placeholder="Doctor Linkedin">
+                  <input type="text" name="linkedinURL" class="form-control" placeholder="Doctor Linkedin">
                   <small>www.linkedin.com/in/...</small>
                 </div>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" placeholder="Doctor Instagram">
+                  <input type="text" name="instagramURL" class="form-control" placeholder="Doctor Instagram">
                   <small>www.instagram.com/...</small>
                 </div>
               </div>
@@ -183,19 +183,19 @@
             <div class="form-group mt-3">
               <div class="row">
                 <div class="col-sm-6">
-                  <input type="email" class="form-control" placeholder="Doctor Email">
+                  <input type="email" name="email" class="form-control" placeholder="Doctor Email">
                 </div>
                 <div class="col-sm-6">
-                  <input type="password" class="form-control" placeholder="Doctor Password">
+                  <input type="password" name="password" class="form-control" placeholder="Doctor Password">
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
