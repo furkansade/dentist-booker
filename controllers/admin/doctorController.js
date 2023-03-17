@@ -25,13 +25,13 @@ exports.deleteDoctor = async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ _id: req.params.id });
 
-    let uploadImage = doctor.photo;
-    let uploadPath = __dirname + "/../../public/" + uploadImage;
-
-    fs.unlink(uploadPath, (err) => {
-      if (err) throw err;
-      else console.log("deleted photo!");
-    });
+      let uploadImage = doctor.photo;
+      let uploadPath = __dirname + "/../../public/" + uploadImage;
+  
+      fs.unlink(uploadPath, (err) => {
+        if (err) throw err;
+        else console.log("deleted photo!");
+      });
 
     await Doctor.findByIdAndRemove(req.params.id);
 
@@ -44,7 +44,7 @@ exports.deleteDoctor = async (req, res) => {
 
 exports.updateDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.findOne({ _id: req.params.id });
+    const doctor = await Doctor.findOne({ _id: req.params.id });  
     doctor.firstName = req.body.firstName;
     doctor.lastName = req.body.lastName;
     doctor.phone = req.body.phone;
@@ -52,7 +52,10 @@ exports.updateDoctor = async (req, res) => {
     doctor.about = req.body.about;
     doctor.linkedinURL = req.body.linkedinURL;
     doctor.instagramURL = req.body.instagramURL;
-    doctor.save();
+    if (req.body.photo) {
+      doctor.photo = req.body.photo;
+    }
+    await doctor.save();
 
     res.status(200).redirect("/admin/doctors");
   } catch (error) {
