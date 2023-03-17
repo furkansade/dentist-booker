@@ -56,7 +56,7 @@
                     <a data-bs-target="#updateDoctor<%= doctors[i]._id %>" data-bs-toggle="modal" class="btn btn-outline-warning">
                       <i class="bi bi-pen"></i>
                     </a>
-                    <a class="btn btn-outline-danger">
+                    <a href="/doctors/<%= doctors[i]._id %>?_method=DELETE" class="btn btn-outline-danger">
                       <i class="bi bi-trash3"></i>
                     </a>
                   </td>
@@ -70,52 +70,50 @@
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
                      <div class="modal-body">
-                       <form action="">
+                       <form method="POST" action="/doctors/<%= doctors[i]._id %>?_method=PUT">
                          <div class="form-group mt-3">
                            <div class="row">
                              <div class="col-sm-4">
-                               <input type="text" class="form-control" placeholder="Doctor First Name" value="<%= doctors[i].firstName %>">
+                               <input type="text" class="form-control" name="firstName" placeholder="Doctor First Name" value="<%= doctors[i].firstName %>">
                              </div>
                              <div class="col-sm-4">
-                               <input type="text" class="form-control" placeholder="Doctor Last Name" value="<%= doctors[i].lastName%>">
+                               <input type="text" class="form-control" name="lastName" placeholder="Doctor Last Name" value="<%= doctors[i].lastName%>">
                              </div>
                              <div class="col-sm-4">
-                               <input type="text" class="form-control" placeholder="Doctor Phone" maxlength="10" value="<%= doctors[i].phone %>">
+                               <input type="text" class="form-control" name="phone" placeholder="Doctor Phone" maxlength="10" value="<%= doctors[i].phone %>">
                              </div>
                            </div>
                          </div>
                          <div class="form-group mt-3">
-                           <select class="form-select" name="" id="">
-                             <option value="">Endo</option>
-                             <option value="">Endo</option>
+                           <select class="form-select" name="department" id="">
                            </select>
                          </div>
                          <div class="form-group mt-3">
-                           <input type="file" class="form-control">
+                           <input type="file" name="photo" class="form-control">
                            <small>Doctor Photo</small>
                          </div>
                          <div class="form-group mt-3">
-                           <textarea name="" id="" class="form-control" placeholder="Doctor About"><%= doctors[i].about %></textarea>
+                           <textarea name="about" id="" class="form-control" placeholder="Doctor About"><%= doctors[i].about %></textarea>
                          </div>
                          <div class="form-group mt-3">
                            <div class="row">
                              <div class="col-sm-6">
-                               <input type="text" class="form-control" placeholder="Doctor Linkedin" value="<%= doctors[i].linkedinURL %>">
+                               <input type="text" class="form-control" name="linkedinURL" placeholder="Doctor Linkedin" value="<%= doctors[i].linkedinURL %>">
                                <small>www.linkedin.com/in/...</small>
                              </div>
                              <div class="col-sm-6">
-                               <input type="text" class="form-control" placeholder="Doctor Instagram" value="<%= doctors[i].instagramURL %>">
+                               <input type="text" class="form-control" name="instagramURL" placeholder="Doctor Instagram" value="<%= doctors[i].instagramURL %>">
                                <small>www.instagram.com/...</small>
                              </div>
                            </div>
                          </div>
 
-                       </form>
-                     </div>
-                     <div class="modal-footer">
-                       <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
-                       <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
-                     </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+                          <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
+                        </div>
+                      </form>
                    </div>
                  </div>
                </div>
@@ -140,7 +138,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="/doctors">
+          <form method="POST" action="/doctors" enctype="multipart/form-data">
             <div class="form-group">
               <input type="text" class="form-control" name="doctorTC" placeholder="Doctor TC" maxlength="11">
             </div>
@@ -192,8 +190,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+            <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
           </div>
         </form>
       </div>
