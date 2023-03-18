@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const slugify = require("slugify");
 
 const Schema = mongoose.Schema;
 
@@ -18,11 +19,20 @@ const DoctorSchema = new Schema({
   instagramURL: String,
   email: String,
   password: String,
+  slug: String,
 });
 
-DoctorSchema.pre('save', function (next) {
+DoctorSchema.pre("validate", function (next) {
+  this.slug = slugify(this.firstName + this.lastName, {
+    lower: true,
+    strict: true,
+  });
+  next();
+});
+
+DoctorSchema.pre("save", function (next) {
   const user = this;
-  if (!user.isModified('password')) return next();
+  if (!user.isModified("password")) return next();
 
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);

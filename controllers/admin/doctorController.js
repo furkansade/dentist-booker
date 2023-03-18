@@ -1,4 +1,5 @@
 const Doctor = require("../../models/Doctor");
+const Appointment = require("../../models/Appointment");
 const fs = require("fs");
 
 exports.createDoctor = async (req, res) => {
@@ -17,7 +18,6 @@ exports.createDoctor = async (req, res) => {
     });
   } catch (error) {
     res.status(400).redirect("/admin/doctors");
-    console.log(error);
   }
 };
 
@@ -65,3 +65,14 @@ exports.updateDoctor = async (req, res) => {
     });
   }
 };
+
+exports.doctorProfile = async (req, res) => {
+  const doctor = await Doctor.findOne({_id : "6413058676f8ba8d9aacbb21"})
+  const appointments = await Appointment.find({doctor: "6413058676f8ba8d9aacbb21"})
+
+  res.status(200).render("site/doctorProfile", {
+    pageName: "doctorProfile",
+    doctor,
+    appointments
+  })
+}

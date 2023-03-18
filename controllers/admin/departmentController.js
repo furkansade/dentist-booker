@@ -1,7 +1,39 @@
-const Department = require("../../models/Department")
+const Department = require("../../models/Department");
+const fs = require("fs");
 
 exports.createDepartment = async (req, res) => {
-    await Department.create(req.body)
+  try {
+    let uploadImage = req.files.photo;
+    let uploadPath =
+      __dirname + "/../../public/img/uploadDepartments/" + uploadImage.name;
 
-    res.status(201).redirect("/admin/departments")
-}
+    uploadImage.mv(uploadPath, async () => {
+      await Department.create({
+        ...req.body,
+        photo: "/img/uploadDepartments/" + uploadImage.name,
+      });
+    });
+    res.status(201).redirect("/admin/departments");
+  } catch (error) {
+    res.status(400).redirect("/admin/departments");
+  }
+};
+
+exports.deleteDepartment = async (req, res) => {
+  try {
+    const department = await Department.findOne({ _id: req.params.id });
+
+    let uploadImage = department.photo;
+    let uploadPath = __dirname + "/../../public/" + uploadImage;
+
+    fs.unlink(uploadPath, (err) => {
+      if (err) throw err;
+    });
+
+    await Department.findByIdAndRemove(req.params.id);
+
+    res.status(200).redirect("/admin/departments");
+  } catch (error) {
+    res.status(400).redirect("/admin/departments");
+  }
+};

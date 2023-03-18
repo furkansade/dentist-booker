@@ -8,7 +8,6 @@ const AppointmentSchema = new Schema({
   patientMail: String,
   patientPhone: String,
   patientMessage: String,
-  patientBirthdate: String,
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Doctor",
@@ -22,7 +21,7 @@ const AppointmentSchema = new Schema({
     enum: ["approved", "pending", "cancelled", "disapproved", "expired"],
     default: "pending",
   },
-  appoDate: Date,
+  appoDate: String,
   appoTime: String
 });
 
