@@ -19,15 +19,6 @@ const DoctorSchema = new Schema({
   instagramURL: String,
   email: String,
   password: String,
-  slug: String,
-});
-
-DoctorSchema.pre("validate", function (next) {
-  this.slug = slugify(this.firstName + this.lastName, {
-    lower: true,
-    strict: true,
-  });
-  next();
 });
 
 DoctorSchema.pre("save", function (next) {

@@ -6,7 +6,7 @@ const appointmentController = require("../../controllers/site/appointmentControl
 const router = express.Router();
 
 router.route("/").get(pageController.getHomePage);
-router.route("/appointments").post(appointmentController.createAppointment)
-
+router.route("/login").get(pageController.getDoctorLoginPage);
+router.route("/appointments").post(appointmentController.createAppointment);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
+const userRoute = require("./routes/site/userRoute");
 
 //ADMIN ROUTE
 const adminPageRoute = require("./routes/admin/pageRoute");
@@ -32,6 +33,7 @@ app.set("view engine", "ejs");
 
 // SITE ROUTES
 app.use("/", sitePageRoute);
+app.use("/users", userRoute);
 
 //ADMIN ROUTES
 app.use("/admin", adminPageRoute);
