@@ -66,13 +66,3 @@ exports.updateDoctor = async (req, res) => {
   }
 };
 
-exports.doctorProfile = async (req, res) => {
-  const doctor = await Doctor.findOne({_id : "6413058676f8ba8d9aacbb21"})
-  const appointments = await Appointment.find({doctor: "6413058676f8ba8d9aacbb21"})
-
-  res.status(200).render("site/doctorProfile", {
-    pageName: "doctorProfile",
-    doctor,
-    appointments
-  })
-}
