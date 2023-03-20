@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
@@ -30,6 +31,7 @@ app.use(
     secret: "my_keyboard-cat",
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/sadeDentDB' })
   })
 );
 app.use(fileUpload());
