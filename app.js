@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
 
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
@@ -14,8 +14,8 @@ const userRoute = require("./routes/site/userRoute");
 const adminPageRoute = require("./routes/admin/pageRoute");
 const doctorRoute = require("./routes/admin/doctorRoute");
 const departmentRoute = require("./routes/admin/departmentRoute");
+const adminUserRoute = require("./routes/admin/userRoute");
 
-const Doctor = require("./models/Doctor")
 
 const app = express();
 
@@ -31,7 +31,9 @@ app.use(
     secret: "my_keyboard-cat",
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/sadeDentDB' })
+    store: MongoStore.create({
+      mongoUrl: "mongodb://127.0.0.1:27017/sadeDentDB",
+    }),
   })
 );
 app.use(fileUpload());
@@ -44,6 +46,8 @@ app.use(
 app.set("view engine", "ejs");
 
 global.doctorIN = null;
+global.userIN = null;
+
 
 // SITE ROUTES
 app.use("*", (req, res, next) => {
@@ -54,9 +58,14 @@ app.use("/", sitePageRoute);
 app.use("/users", userRoute);
 
 //ADMIN ROUTES
+app.use("*", (req, res, next) => {
+  userIN = req.session.userID;
+  next();
+});
 app.use("/admin", adminPageRoute);
 app.use("/doctors", doctorRoute);
 app.use("/departments", departmentRoute);
+app.use("/admin/users", adminUserRoute);
 
 const PORT = 9000;
 app.listen(PORT, () => {

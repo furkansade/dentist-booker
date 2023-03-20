@@ -9,7 +9,7 @@ const router = express.Router();
 router.route("/").get(pageController.getHomePage);
 router
   .route("/login")
-  .get(redirectMiddleware, pageController.getDoctorLoginPage);
+  .get(redirectMiddleware.redirectDoctor, pageController.getDoctorLoginPage);
 router.route("/appointments").post(appointmentController.createAppointment);
 
 module.exports = router;
