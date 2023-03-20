@@ -11,7 +11,7 @@ exports.loginDoctor = async (req, res) => {
         bcrypt.compare(password, doctor.password, (err, same) => {
           if (same) {
             req.session.doctorID = doctor._id
-            res.status(200).redirect("/")
+            res.status(200).redirect("/users/profile")
           }
         });
       }
@@ -34,5 +34,11 @@ exports.doctorProfile = async (req, res) => {
     pageName: "doctorProfile",
     doctor,
     appointments
+  })
+}
+
+exports.logoutDoctor = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/")
   })
 }
