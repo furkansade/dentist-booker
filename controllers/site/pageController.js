@@ -4,6 +4,7 @@ const Department = require("../../models/Department");
 exports.getHomePage = async (req, res) => {
   const doctors = await Doctor.find();
   const departments = await Department.find();
+  console.log(req.session.doctorID)
 
   res.status(200).render("site/index", {
     pageName: "home",

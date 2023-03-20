@@ -10,7 +10,12 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a href="/login" class="linkedin"><i class="bi bi-person">Giriş</i></i></a>
+        <% if(!doctorIN) { %>
+        <a href="/login" class="linkedin"><i class="bi bi-person">Login</i></i></a>
+        <% } %>
+        <% if(doctorIN) { %>
+          <a href="/users/profile"><i class="bi bi-calendar-plus">Appointments</i></a>
+          <% } %>
       </div>
     </div>
   </div>
@@ -25,7 +30,6 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a href="/doctors/6413058676f8ba8d9aacbb21">İpek Uçkun</a></li>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#departments">Departments</a></li>

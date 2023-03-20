@@ -1,5 +1,6 @@
-const Doctor = require("../../models/Doctor");
 const bcrypt = require("bcrypt");
+const Doctor = require("../../models/Doctor");
+const Appointment = require("../../models/Appointment")
 
 exports.loginDoctor = async (req, res) => {
   try {
@@ -9,8 +10,8 @@ exports.loginDoctor = async (req, res) => {
       if (doctor) {
         bcrypt.compare(password, doctor.password, (err, same) => {
           if (same) {
-            //USER SESSION
-            res.status(200).send("You are logged in!");
+            req.session.doctorID = doctor._id
+            res.status(200).redirect("/")
           }
         });
       }
@@ -23,3 +24,15 @@ exports.loginDoctor = async (req, res) => {
     console.log(error)
   }
 };
+
+exports.doctorProfile = async (req, res) => {
+  const doctor = await Doctor.findOne({_id: req.session.doctorID})
+  const appointments = await Appointment.find({doctor: doctor._id})
+
+
+  res.status(200).render("site/doctorProfile", {
+    pageName: "doctorProfile",
+    doctor,
+    appointments
+  })
+}
