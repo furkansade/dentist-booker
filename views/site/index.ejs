@@ -614,6 +614,29 @@
 
   </main><!-- End #main -->
 
+  <!-- APPOINTMENT INFO -->
+<div class="modal fade" id="appoStatus" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title">Appointment Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form>
+        <div class="form-group">
+          <input type="text" name="patientTC" class="form-control" placeholder="Patient TC">
+        </div>
+        <button type="button" onclick="showStatus()" class="btn btn-outline-success mt-3 float-right">Show!</button>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
  <%- include("templates/_footer") %>
  
  <div id="preloader"></div>
@@ -621,6 +644,12 @@
  
  
  <%- include("templates/_script") %>
+
+ <script>
+  function showStatus() {
+    alert("selam")
+  }
+ </script>
 
 </body>
 

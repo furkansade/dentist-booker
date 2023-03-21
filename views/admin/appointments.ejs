@@ -19,28 +19,30 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Appointments</h5>
+          <button class="btn btn-outline-warning" onclick="sortTableDate()">Sort</button>
 
           <!-- Table with stripped rows -->
-          <table class="table table-striped">
+          <table id="appointmentsTable" class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Patient TC</th>
                 <th scope="col">Patient Name</th>
                 <th scope="col">Doctor</th>
-                <th scope="col">Deparment</th>
+                <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Status</th>
                 <th scope="col">Detail</th>
               </tr>
             </thead>
             <tbody>
+              <% for(let i=0; i < appointments.length; i++) { %>
               <tr>
-                <th scope="row">1</th>
-                <td>Brandon Jacob</td>
-                <td>Designer</td>
-                <td>28</td>
-                <td>2016-05-25 | 08.30</td>
-                <td><button class="btn btn-outline-dark" disabled>Pending</button></td>
+                <th scope="row"><%= appointments[i].patientTC %></th>
+                <td><%= appointments[i].patientName %></td>
+                <td><%= appointments[i].doctor.firstName %> <%= appointments[i].doctor.lastName %></td>
+                <td><%= appointments[i].appoDate %></td>
+                <td><%= appointments[i].appoTime %></td>
+                <td><button class="btn btn-outline-dark" disabled><%= appointments[i].status %></button></td>
                 <td>
                   <a data-bs-target="#detailID" data-bs-toggle="modal" class="btn btn-outline-primary">
                     <i class="bi bi-info-circle"></i>
@@ -118,6 +120,7 @@
                   </div>
                 </div><!-- End Extra Large Modal-->
               </tr>
+              <% } %>
             </tbody>
           </table>
           <!-- End Table with stripped rows -->
@@ -134,6 +137,23 @@
  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
  
  <%- include("templates/_script") %>
+ <script>
+  function sortTableDate() {
+             const table = document.getElementById("appointmentsTable");
+             const tbody = table.getElementsByTagName("tbody")[0];
+             const rows = tbody.getElementsByTagName("tr");
+           
+             const sortedRows = Array.from(rows).sort((a, b) => {
+               const aName = a.getElementsByTagName("td")[3].textContent;
+               const bName = b.getElementsByTagName("td")[3].textContent;
+               return bName.localeCompare(aName);
+             });
+           
+             for (let i = 0; i < sortedRows.length; i++) {
+               tbody.appendChild(sortedRows[i]);
+             }
+           }
+</script>
   
 
 </body>

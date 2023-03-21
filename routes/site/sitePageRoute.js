@@ -12,4 +12,5 @@ router
   .get(redirectMiddleware.redirectDoctor, pageController.getDoctorLoginPage);
 router.route("/appointments").post(appointmentController.createAppointment);
 
+
 module.exports = router;

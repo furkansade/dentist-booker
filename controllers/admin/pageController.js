@@ -1,6 +1,7 @@
 const Doctor = require("../../models/Doctor");
 const Department = require("../../models/Department");
 const User = require("../../models/User");
+const Appointment = require("../../models/Appointment");
 
 exports.getProfilePage = async (req, res) => {
   const user = await User.findOne({ _id: req.session.userID });
@@ -11,8 +12,11 @@ exports.getProfilePage = async (req, res) => {
   });
 };
 exports.getAppointmentsPage = async (req, res) => {
+  const appointments = await Appointment.find().populate("doctor");
+
   res.status(200).render("admin/appointments", {
     pageName: "appointments",
+    appointments,
   });
 };
 exports.getDepartmentsPage = async (req, res) => {

@@ -9,6 +9,7 @@ const MongoStore = require("connect-mongo");
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
 const userRoute = require("./routes/site/userRoute");
+const appointmentStatus = require("./routes/site/appointmentStatus");
 
 //ADMIN ROUTE
 const adminPageRoute = require("./routes/admin/pageRoute");
@@ -56,6 +57,7 @@ app.use("*", (req, res, next) => {
 });
 app.use("/", sitePageRoute);
 app.use("/users", userRoute);
+app.use("/appointments", appointmentStatus)
 
 //ADMIN ROUTES
 app.use("*", (req, res, next) => {
