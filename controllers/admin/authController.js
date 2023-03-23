@@ -11,8 +11,14 @@ exports.loginAdmin = async (req, res) => {
           if (same) {
             req.session.userID = user._id;
             res.status(200).redirect("/admin/profile");
+          } else {
+            req.flash("error", "Email or Password not correct!");
+            res.status(400).redirect("/admin/login");
           }
         });
+      } else {
+        req.flash("error", "Admin not exist!");
+        res.status(400).redirect("/admin/login");
       }
     });
   } catch (error) {

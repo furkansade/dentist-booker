@@ -14,6 +14,7 @@ exports.createDoctor = async (req, res) => {
         photo: "/img/uploadDoctors/" + uploadImage.name,
       });
 
+      req.flash("success", "Created doctor!");
       res.status(201).redirect("/admin/doctors");
     });
   } catch (error) {
@@ -25,26 +26,27 @@ exports.deleteDoctor = async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ _id: req.params.id });
 
-      let uploadImage = doctor.photo;
-      let uploadPath = __dirname + "/../../public/" + uploadImage;
-  
+    let uploadImage = doctor.photo;
+    let uploadPath = __dirname + "/../../public/" + uploadImage;
+
+    if (uploadImage) {
       fs.unlink(uploadPath, (err) => {
         if (err) throw err;
-        else console.log("deleted photo!");
       });
+    }
 
     await Doctor.findByIdAndRemove(req.params.id);
 
+    req.flash("success", "Deleted doctor!");
     res.status(200).redirect("/admin/doctors");
   } catch (error) {
     res.status(400).redirect("/admin/doctors");
-    console.log(error);
   }
 };
 
 exports.updateDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.findOne({ _id: req.params.id });  
+    const doctor = await Doctor.findOne({ _id: req.params.id });
     doctor.firstName = req.body.firstName;
     doctor.lastName = req.body.lastName;
     doctor.phone = req.body.phone;
@@ -65,4 +67,3 @@ exports.updateDoctor = async (req, res) => {
     });
   }
 };
-

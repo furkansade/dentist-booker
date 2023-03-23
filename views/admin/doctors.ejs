@@ -10,6 +10,18 @@
 
   <main id="main" class="main">
 
+    <div class="row">
+      <div class="col-md-4">
+        <% if(flashMessages) { %>
+          <% if(flashMessages.success) { %>
+            <div class="alert alert-success">
+              <%= flashMessages.success %> 
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+
     <div class="pagetitle mb-4">
       <h1>Sade Dental Doctors</h1>
     </div><!-- End Page Title -->
@@ -50,7 +62,7 @@
                   <th scope="row"><%= doctors[i].doctorTC %></th>
                   <td><img src="<%= doctors[i].photo %>" alt="" width="80px"></td>
                   <td><%= doctors[i].firstName %> <%= doctors[i].lastName %></td>
-                  <td><%= doctors[i].department %></td>
+                  <td><%= doctors[i].department.name %></td>
                   <td><%= doctors[i].phone %></td>
                   <td>
                     <a data-bs-target="#updateDoctor<%= doctors[i]._id %>" data-bs-toggle="modal" class="btn btn-outline-warning">
@@ -166,6 +178,9 @@
             </div>
             <div class="form-group mt-3">
               <select class="form-select" name="department" id="">
+                <% for(let i = 0; i < departments.length; i++) { %>
+                  <option value="<%= departments[i]._id %>"><%= departments[i].name %></option>
+                <% } %>
               </select>
             </div>
             <div class="form-group mt-3">

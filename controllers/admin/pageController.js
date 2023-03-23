@@ -29,10 +29,12 @@ exports.getDepartmentsPage = async (req, res) => {
 };
 exports.getDoctorsPage = async (req, res) => {
   const doctors = await Doctor.find().populate("department");
+  const departments = await Department.find();
 
   res.status(200).render("admin/doctors", {
     pageName: "doctors",
     doctors,
+    departments
   });
 };
 exports.getFaqsPage = async (req, res) => {
