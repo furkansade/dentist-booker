@@ -18,8 +18,22 @@
     <div class="row">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Appointments</h5>
-          <button class="btn btn-outline-warning" onclick="sortTableDate()">Sort</button>
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="card-title">Appointments</h5>
+            </div>
+            <div class="col-md-6 ">
+              <h5 class="card-title d-flex justify-content-end mx-3">
+                <a onclick="sortTableDate()" class="btn btn-outline-primary mx-2">
+                  Sort Date
+                </a>
+                <a data-bs-target="#pastAppo" data-bs-toggle="modal" class="btn btn-outline-warning">
+                  <i class="bi bi-balloon text-dark"></i>
+                  Past Appointments
+                </a>
+              </h5>
+            </div>
+          </div>
 
           <!-- Table with stripped rows -->
           <table id="appointmentsTable" class="table table-striped">
@@ -36,90 +50,92 @@
             </thead>
             <tbody>
               <% for(let i=0; i < appointments.length; i++) { %>
-              <tr>
-                <th scope="row"><%= appointments[i].patientTC %></th>
-                <td><%= appointments[i].patientName %></td>
-                <td><%= appointments[i].doctor.firstName %> <%= appointments[i].doctor.lastName %></td>
-                <td><%= appointments[i].appoDate %></td>
-                <td><%= appointments[i].appoTime %></td>
-                <td><button class="btn btn-outline-dark" disabled><%= appointments[i].status %></button></td>
-                <td>
-                  <a data-bs-target="#detailID" data-bs-toggle="modal" class="btn btn-outline-primary">
-                    <i class="bi bi-info-circle"></i>
-                  </a>
-                </td>
-                <div class="modal fade" id="detailID" tabindex="-1">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Appointment Detail</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Patient TC:</label>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control" value="12345678998" style="cursor: default;" readonly>
+                <% if(appointments[i].appoDate >= Date.now()) { %>
+                <tr>
+                  <th scope="row"><%= appointments[i].patientTC %></th>
+                  <td><%= appointments[i].patientName %></td>
+                  <td><%= appointments[i].doctor.firstName %> <%= appointments[i].doctor.lastName %></td>
+                  <td><%= appointments[i].appoDate.getDate() %>.<%= appointments[i].appoDate.getMonth()+1 %>.<%= appointments[i].appoDate.getFullYear() %></td>
+                  <td><%= appointments[i].appoTime %></td>
+                  <td><button class="btn btn-outline-dark" disabled><%= appointments[i].status %></button></td>
+                  <td>
+                    <a data-bs-target="#detailID" data-bs-toggle="modal" class="btn btn-outline-primary">
+                      <i class="bi bi-info-circle"></i>
+                    </a>
+                  </td>
+                  <div class="modal fade" id="detailID" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Appointment Detail</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group row">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Patient TC:</label>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control" value="12345678998" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Patient Name:</label>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control" value="Furkan Sade Uckun" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Patient Name:</label>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control" value="Furkan Sade Uckun" style="cursor: default;" readonly>
+                              </div>
+                              <div class="col-sm-3">
+                                <input type="text" class="form-control" value="23.08.2001" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                            <div class="col-sm-3">
-                              <input type="text" class="form-control" value="23.08.2001" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Patient Contact:</label>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control" value="fsadeuckun@gmail.com" style="cursor: default;" readonly>
+                              </div>
+                              <div class="col-sm-3">
+                                <input type="text" class="form-control" value="5511209898" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Patient Contact:</label>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control" value="fsadeuckun@gmail.com" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Department:</label>
+                              <div class="col-sm-3">
+                                <input type="text" class="form-control border-primary" value="Pedodontics" style="cursor: default;" readonly>
+                              </div>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control border-primary" value="Ipek Uckun" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                            <div class="col-sm-3">
-                              <input type="text" class="form-control" value="5511209898" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Date:</label>
+                              <div class="col-sm-2">
+                                <input type="text" class="form-control border-danger" value="27.03.2023" style="cursor: default;" readonly>
+                              </div>
+                              <div class="col-sm-2">
+                                <input type="text" class="form-control border-danger" value="11.20" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Department:</label>
-                            <div class="col-sm-3">
-                              <input type="text" class="form-control border-primary" value="Pedodontics" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Status:</label>
+                              <div class="col-sm-4">
+                                <input type="text" class="form-control border-warning" value="Pending" style="cursor: default;" readonly>
+                              </div>
                             </div>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control border-primary" value="Ipek Uckun" style="cursor: default;" readonly>
+                            <div class="form-group row mt-3">
+                              <label for="inputPassword" class="col-sm-3 col-form-label">Patient Message:</label>
+                              <div class="col-sm-7">
+                                <textarea class="form-control" readonly>İğneden çok korkuyorum.</textarea>
+                              </div>
                             </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Date:</label>
-                            <div class="col-sm-2">
-                              <input type="text" class="form-control border-danger" value="27.03.2023" style="cursor: default;" readonly>
-                            </div>
-                            <div class="col-sm-2">
-                              <input type="text" class="form-control border-danger" value="11.20" style="cursor: default;" readonly>
-                            </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Status:</label>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control border-warning" value="Pending" style="cursor: default;" readonly>
-                            </div>
-                          </div>
-                          <div class="form-group row mt-3">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Patient Message:</label>
-                            <div class="col-sm-7">
-                              <textarea class="form-control" readonly>İğneden çok korkuyorum.</textarea>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div><!-- End Extra Large Modal-->
-              </tr>
+                  </div><!-- End Extra Large Modal-->
+                </tr>
+                <% } %>
               <% } %>
             </tbody>
           </table>
@@ -130,7 +146,10 @@
     </div>
   </section>
 
+
 </main><!-- End #main -->
+
+
 
  <%- include("templates/_footer") %>
  
@@ -146,7 +165,7 @@
              const sortedRows = Array.from(rows).sort((a, b) => {
                const aName = a.getElementsByTagName("td")[3].textContent;
                const bName = b.getElementsByTagName("td")[3].textContent;
-               return bName.localeCompare(aName);
+               return aName.localeCompare(bName);
              });
            
              for (let i = 0; i < sortedRows.length; i++) {

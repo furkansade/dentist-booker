@@ -21,8 +21,12 @@ const AppointmentSchema = new Schema({
     enum: ["approved", "pending", "cancelled", "disapproved", "expired"],
     default: "pending",
   },
-  appoDate: String,
-  appoTime: String
+  appoDate: {
+    type: Date,
+    default:Date.now()
+  },
+  appoTime: String,
+  
 });
 
 const Appointment = mongoose.model("Appointment", AppointmentSchema);

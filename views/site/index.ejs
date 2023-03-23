@@ -350,13 +350,13 @@
               <div class="validate"></div>
             </div>
             <div class="col-md-2 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="patientEmail" id="phone" placeholder="Your Email">
+              <input type="email" class="form-control" name="patientMail" id="phone" placeholder="Your Email">
               <div class="validate"></div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-2 form-group mt-3">
-              <input type="date" name="appoDate" class="form-control" id="date" placeholder="Appointment Date">
+              <input type="date" name="appoDate" class="form-control" id="date" min="today" placeholder="Appointment Date">
               <div class="validate"></div>
             </div>
             <div class="col-md-2 form-group mt-3">
@@ -365,7 +365,6 @@
             </div>
             <div class="col-md-4 form-group mt-3">
               <select name="department" id="department" class="form-select">
-                  <option value="">Select Department</option>
                 <% for(let i = 0; i < departments.length; i++) { %>
                   <option value="<%= departments[i]._id %>"><%= departments[i].name %></option>
                   <% } %>
@@ -374,7 +373,6 @@
             </div>
             <div class="col-md-4 form-group mt-3">
               <select name="doctor" id="doctor" class="form-select">
-                <option value="">Select Doctor</option>
                 <% for(let i = 0; i < doctors.length; i++) { %>
                 <option value="<%= doctors[i]._id %>"><%= doctors[i].firstName %> <%= doctors[i].lastName %></option>
                 <% } %>
@@ -623,11 +621,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <form>
+       <form method="post" action="/appointments/status">
         <div class="form-group">
           <input type="text" name="patientTC" class="form-control" placeholder="Patient TC">
         </div>
-        <button type="button" onclick="showStatus()" class="btn btn-outline-success mt-3 float-right">Show!</button>
+        <div class="form-group mt-3 mb-3">
+          <input type="email" name="patientMail" class="form-control" placeholder="Patient Mail">
+        </div>
+        <button type="submit" class="btn btn-outline-success mt-3 float-right">Show!</button>
        </form>
       </div>
       <div class="modal-footer">
@@ -644,12 +645,6 @@
  
  
  <%- include("templates/_script") %>
-
- <script>
-  function showStatus() {
-    alert("selam")
-  }
- </script>
 
 </body>
 

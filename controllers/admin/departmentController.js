@@ -1,4 +1,5 @@
 const Department = require("../../models/Department");
+const Appointment = require("../../models/Appointment");
 const fs = require("fs");
 
 exports.createDepartment = async (req, res) => {
@@ -31,6 +32,12 @@ exports.deleteDepartment = async (req, res) => {
     });
 
     await Department.findByIdAndRemove(req.params.id);
+
+    const appointment = await Appointment.findOne({
+      department: req.params.id,
+    });
+    appointment.department = null;
+    appointment.save();
 
     res.status(200).redirect("/admin/departments");
   } catch (error) {
