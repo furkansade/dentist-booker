@@ -2,7 +2,7 @@ const Doctor = require("../../models/Doctor");
 const Department = require("../../models/Department");
 
 exports.getHomePage = async (req, res) => {
-  const doctors = await Doctor.find();
+  const doctors = await Doctor.find().populate("department");
   const departments = await Department.find();
 
   res.status(200).render("site/index", {
