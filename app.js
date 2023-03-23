@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
 
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
@@ -16,7 +17,6 @@ const adminPageRoute = require("./routes/admin/pageRoute");
 const doctorRoute = require("./routes/admin/doctorRoute");
 const departmentRoute = require("./routes/admin/departmentRoute");
 const adminUserRoute = require("./routes/admin/userRoute");
-
 
 const app = express();
 
@@ -37,6 +37,11 @@ app.use(
     }),
   })
 );
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashMessages = req.flash();
+  next();
+});
 app.use(fileUpload());
 app.use(
   methodOverride("_method", {
@@ -49,7 +54,6 @@ app.set("view engine", "ejs");
 global.doctorIN = null;
 global.userIN = null;
 
-
 // SITE ROUTES
 app.use("*", (req, res, next) => {
   doctorIN = req.session.doctorID;
@@ -57,7 +61,7 @@ app.use("*", (req, res, next) => {
 });
 app.use("/", sitePageRoute);
 app.use("/users", userRoute);
-app.use("/appointments", appointmentStatus)
+app.use("/appointments", appointmentStatus);
 
 //ADMIN ROUTES
 app.use("*", (req, res, next) => {
