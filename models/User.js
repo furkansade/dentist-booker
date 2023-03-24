@@ -16,6 +16,11 @@ const UserSchema = new Schema({
   logo: String,
   address: String,
   about: String,
+  twitter: String,
+  instagram: String,
+  linkedin: String,
+  facebook: String,
+  youtube: String,
 });
 
 UserSchema.pre("save", function (next) {

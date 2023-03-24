@@ -50,7 +50,6 @@ exports.updateDoctor = async (req, res) => {
     doctor.firstName = req.body.firstName;
     doctor.lastName = req.body.lastName;
     doctor.phone = req.body.phone;
-    doctor.department = req.body.department;
     doctor.about = req.body.about;
     doctor.linkedinURL = req.body.linkedinURL;
     doctor.instagramURL = req.body.instagramURL;
