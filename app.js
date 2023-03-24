@@ -17,6 +17,7 @@ const adminPageRoute = require("./routes/admin/pageRoute");
 const doctorRoute = require("./routes/admin/doctorRoute");
 const departmentRoute = require("./routes/admin/departmentRoute");
 const adminUserRoute = require("./routes/admin/userRoute");
+const faqRoute = require("./routes/admin/faqRoute");
 
 const app = express();
 
@@ -72,6 +73,7 @@ app.use("/admin", adminPageRoute);
 app.use("/doctors", doctorRoute);
 app.use("/departments", departmentRoute);
 app.use("/admin/users", adminUserRoute);
+app.use("/faqs", faqRoute);
 
 const PORT = 9000;
 app.listen(PORT, () => {

@@ -41,16 +41,17 @@
                 </tr>
               </thead>
               <tbody>
+                <% for(let i = 0; i < faqs.length; i++) { %>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td><%= faqs[i].question %></td>
+                  <td><%= faqs[i].answer %></td>
                   <td>
                     <a class="btn btn-outline-danger">
                       <i class="bi bi-trash3"></i>
                     </a>
                   </td>
                 </tr>
-                 
+                 <% } %>
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
@@ -71,19 +72,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="/faqs" method="POST">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Question">
+              <input type="text" class="form-control" name="question" placeholder="Question">
             </div>
             <div class="form-group mt-3">
-              <textarea name="" id="" class="form-control" rows="4" placeholder="Answer"></textarea>
+              <textarea name="answer" id="" class="form-control" rows="4" placeholder="Answer"></textarea>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success mx-2">Save!</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

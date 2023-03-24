@@ -2,6 +2,7 @@ const Doctor = require("../../models/Doctor");
 const Department = require("../../models/Department");
 const User = require("../../models/User");
 const Appointment = require("../../models/Appointment");
+const FAQ = require("../../models/FAQ");
 
 exports.getProfilePage = async (req, res) => {
   const user = await User.findOne({ _id: req.session.userID });
@@ -34,12 +35,15 @@ exports.getDoctorsPage = async (req, res) => {
   res.status(200).render("admin/doctors", {
     pageName: "doctors",
     doctors,
-    departments
+    departments,
   });
 };
 exports.getFaqsPage = async (req, res) => {
+  const faqs = await FAQ.find();
+
   res.status(200).render("admin/faqs", {
     pageName: "faqs",
+    faqs,
   });
 };
 exports.getLoginPage = async (req, res) => {
