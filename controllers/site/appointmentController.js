@@ -27,7 +27,11 @@ exports.showAppointmentStatus = async (req, res) => {
       } else if (!appointment) {
         res.status(404).send("Kullanıcı bulunamadı");
       } else {
-        res.redirect("/");
+        //res.send(appointment.status);
+        res.status(200).render("site/appointmentStatus", {
+          appointment,
+        })
+        
       }
     })
   } catch (error) {

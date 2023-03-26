@@ -1,0 +1,63 @@
+<%- include("templates/_header") %>
+
+<body>
+
+  <%- include("templates/_navbar") %>
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Appointment Status</h2>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+          <div class="row">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="card-title"><%= appointment.patientName %></h5>
+                  </div>
+                </div>
+    
+                <form>
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Patient TC:</label>
+                      <div class="col-sm-3">
+                        <button class="btn btn-outline-success text-dark mb-2" disabled><%= appointment.patientTC %></button>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputPassword" class="col-sm-2 col-form-label">Appointment Status:</label>
+                      <div class="col-sm-3">
+                        <button class="btn btn-outline-success text-dark" disabled><%= appointment.status %></button>
+                      </div>
+                    </div>
+                </form>
+    
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ <%- include("templates/_footer") %>
+ 
+ <div id="preloader"></div>
+ <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+ 
+ 
+ <%- include("templates/_script") %>
+
+</body>
+
+</html>
