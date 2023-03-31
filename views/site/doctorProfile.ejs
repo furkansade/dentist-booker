@@ -145,7 +145,7 @@
               <th scope="col">Appointment Date</th>
               <th scope="col">Appointment Time</th>
               <th scope="col">Appointment Status</th>
-              <th scope="col">Appointment Message</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -157,48 +157,9 @@
                 <td><%= appointments[i].patientPhone%></td>
                 <td><%= appointments[i].appoDate.getDate() %>.<%= appointments[i].appoDate.getMonth()+1 %>.<%= appointments[i].appoDate.getFullYear() %></td>
                 <td><%= appointments[i].appoTime %></td>
-                <td>
-                  <form method="post" action="/appointments/<%= appointments[i]._id %>?_method=PUT">
-                    <div class="form-group">
-                      <div class="row">
-
-                      
-                      <div class="col-md-9">
-                        <select name="status" id="" class="form-select">
-                          <option value=" <%= appointments[i].status %>"> <%= appointments[i].status %></option>
-                          <option value="approved">approved</option>
-                          <option value="cancelled">cancelled</option>
-                          <option value="disapproved">disapproved</option>
-                          <option value="expired">expired</option>
-                          <option value="pending">pending</option>
-                        </select>
-                      </div>
-                      <div class="col-md-3">
-                        <button type="submit" class="btn btn-outline-success btn-sm"><i class="bi bi-recycle"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </td>
-              <td><a data-bs-target="#appoMessage<%= appointments[i]._id %>" data-bs-toggle="modal" class="btn btn-outline-dark d-flex justify-content-center"><i class="bi bi-envelope"></i></a></td>
+                <td><%= appointments[i].status %></td>
             </tr>
-            <!-- APPOINTMENT MESSAGE -->
-            <div class="modal fade" id="appoMessage<%= appointments[i]._id %>" tabindex="-1">
-             <div class="modal-dialog modal-dialog-centered modal-lg">
-               <div class="modal-content" >
-                 <div class="modal-header">
-                   <h5 class="modal-title"><%= appointments[i].patientName %></h5>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body">
-                   <textarea cols="30" rows="3" class="form-control" disabled><%= appointments[i].patientMessage %></textarea>
-                 </div>
-                 <div class="modal-footer">
-                   <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
-                 </div>
-               </div>
-             </div>
-           </div>
+        
             <% } %>
             <% } %>
           </tbody>
