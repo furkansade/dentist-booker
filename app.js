@@ -18,6 +18,7 @@ const doctorRoute = require("./routes/admin/doctorRoute");
 const departmentRoute = require("./routes/admin/departmentRoute");
 const adminUserRoute = require("./routes/admin/userRoute");
 const faqRoute = require("./routes/admin/faqRoute");
+const User = require("./models/User");
 
 const app = express();
 
@@ -55,6 +56,12 @@ app.set("view engine", "ejs");
 global.doctorIN = null;
 global.userIN = null;
 
+async (req, res) => {
+  const user = await User.findOne({_id: "641817a8d0cd8c70f1477831"});
+  res.locals.user = user;
+  res.render('site/templates/_navbar');
+}
+
 // SITE ROUTES
 app.use("*", (req, res, next) => {
   doctorIN = req.session.doctorID;
@@ -69,8 +76,8 @@ app.use("*", (req, res, next) => {
   userIN = req.session.userID;
   next();
 });
-app.use("/admin", adminPageRoute);
 app.use("/doctors", doctorRoute);
+app.use("/admin", adminPageRoute);
 app.use("/departments", departmentRoute);
 app.use("/admin/users", adminUserRoute);
 app.use("/faqs", faqRoute);

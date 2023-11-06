@@ -13,7 +13,7 @@ exports.getProfilePage = async (req, res) => {
   });
 };
 exports.getAppointmentsPage = async (req, res) => {
-  const appointments = await Appointment.find().populate("doctor");
+  const appointments = await Appointment.find().populate("doctor").populate("department");
 
   res.status(200).render("admin/appointments", {
     pageName: "appointments",

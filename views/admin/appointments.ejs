@@ -75,55 +75,53 @@
                             <div class="form-group row">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Patient TC:</label>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control" value="12345678998" style="cursor: default;" readonly>
+                                <input type="text" class="form-control" value="<%= appointments[i].patientTC %>" style="cursor: default;" readonly>
                               </div>
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Patient Name:</label>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control" value="Furkan Sade Uckun" style="cursor: default;" readonly>
+                                <input type="text" class="form-control" value="<%= appointments[i].patientName %>" style="cursor: default;" readonly>
                               </div>
-                              <div class="col-sm-3">
-                                <input type="text" class="form-control" value="23.08.2001" style="cursor: default;" readonly>
-                              </div>
+                             
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Patient Contact:</label>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control" value="fsadeuckun@gmail.com" style="cursor: default;" readonly>
+                                <input type="text" class="form-control" value="<%= appointments[i].patientPhone %>" style="cursor: default;" readonly>
                               </div>
                               <div class="col-sm-3">
-                                <input type="text" class="form-control" value="5511209898" style="cursor: default;" readonly>
+                                <input type="text" class="form-control" value="<%= appointments[i].patientMail %>" style="cursor: default;" readonly>
                               </div>
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Department:</label>
                               <div class="col-sm-3">
-                                <input type="text" class="form-control border-primary" value="Pedodontics" style="cursor: default;" readonly>
+                                <input type="text" class="form-control border-primary" value="<%= appointments[i].department.name %>" style="cursor: default;" readonly>
                               </div>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control border-primary" value="Ipek Uckun" style="cursor: default;" readonly>
+                                <input type="text" class="form-control border-primary" value="<%= appointments[i].doctor.firstName%> <%= appointments[i].doctor.lastName %>" style="cursor: default;" readonly>
                               </div>
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Date:</label>
                               <div class="col-sm-2">
-                                <input type="text" class="form-control border-danger" value="27.03.2023" style="cursor: default;" readonly>
+                                <input type="text" class="form-control border-danger" value="<%= appointments[i].appoDate %>" style="cursor: default;" readonly>
                               </div>
                               <div class="col-sm-2">
-                                <input type="text" class="form-control border-danger" value="11.20" style="cursor: default;" readonly>
+                                <input type="text" class="form-control border-danger" value="<%= appointments[i].appoTime %>" style="cursor: default;" readonly>
                               </div>
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Appointment Status:</label>
                               <div class="col-sm-4">
-                                <input type="text" class="form-control border-warning" value="Pending" style="cursor: default;" readonly>
+                                <input type="text" class="form-control border-warning" value="<%= appointments[i].status %>" style="cursor: default;" readonly>
                               </div>
                             </div>
                             <div class="form-group row mt-3">
                               <label for="inputPassword" class="col-sm-3 col-form-label">Patient Message:</label>
                               <div class="col-sm-7">
-                                <textarea class="form-control" readonly>İğneden çok korkuyorum.</textarea>
+                                <textarea class="form-control" readonly><%= appointments[i].message %></textarea>
                               </div>
                             </div>
                           </form>
