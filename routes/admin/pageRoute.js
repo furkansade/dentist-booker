@@ -10,6 +10,6 @@ router.route("/appointments").get(authMiddleware.authUser, pageController.getApp
 router.route("/departments").get(authMiddleware.authUser, pageController.getDepartmentsPage);
 router.route("/doctors").get(authMiddleware.authUser, pageController.getDoctorsPage);
 router.route("/faqs").get(authMiddleware.authUser, pageController.getFaqsPage);
-router.route("/login").get(redirectMiddleware.redirectUser, pageController.getLoginPage);
+router.route("/login").get(pageController.getLoginPage);
 
 module.exports = router;

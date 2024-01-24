@@ -6,6 +6,12 @@ const fileUpload = require("express-fileupload");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
+const dotenv = require("dotenv");
+
+const connectToDatabase = require("./helpers/db.js");
+
+dotenv.config();
+connectToDatabase();
 
 //SITE ROUTE
 const sitePageRoute = require("./routes/site/sitePageRoute");
@@ -22,10 +28,6 @@ const User = require("./models/User");
 
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/sadeDentDB").then(() => {
-  console.log("connected database!");
-});
-
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,7 +37,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/sadeDentDB",
+      mongoUrl: process.env.DB_URI,
     }),
   })
 );
@@ -57,7 +59,7 @@ global.doctorIN = null;
 global.userIN = null;
 
 async (req, res) => {
-  const user = await User.findOne({_id: "641817a8d0cd8c70f1477831"});
+  const user = await User.findOne({_id: "65b10f70fba588c047947969"});
   res.locals.user = user;
   res.render('site/templates/_navbar');
 }

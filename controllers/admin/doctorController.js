@@ -5,6 +5,7 @@ const fs = require("fs");
 exports.createDoctor = async (req, res) => {
   try {
     let uploadImage = req.files.photo;
+
     let uploadPath =
       __dirname + "/../../public/img/uploadDoctors/" + uploadImage.name;
 
