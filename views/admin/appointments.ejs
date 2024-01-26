@@ -59,11 +59,11 @@
                   <td><%= appointments[i].appoTime %></td>
                   <td><button class="btn btn-outline-dark" disabled><%= appointments[i].status %></button></td>
                   <td>
-                    <a data-bs-target="#detailID" data-bs-toggle="modal" class="btn btn-outline-primary">
+                    <a data-bs-target="#detailID<%= appointments[i]._id %>" data-bs-toggle="modal" class="btn btn-outline-primary">
                       <i class="bi bi-info-circle"></i>
                     </a>
                   </td>
-                  <div class="modal fade" id="detailID" tabindex="-1">
+                  <div class="modal fade" id="detailID<%= appointments[i]._id %>" tabindex="-1">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -119,9 +119,9 @@
                               </div>
                             </div>
                             <div class="form-group row mt-3">
-                              <label for="inputPassword" class="col-sm-3 col-form-label">Patient Message:</label>
+                              <label class="col-sm-3 col-form-label">Patient Message:</label>
                               <div class="col-sm-7">
-                                <textarea class="form-control" readonly><%= appointments[i].message %></textarea>
+                                <textarea class="form-control" readonly><%= appointments[i].patientMessage %></textarea>
                               </div>
                             </div>
                           </form>
@@ -146,6 +146,52 @@
 
 
 </main><!-- End #main -->
+
+<div class="modal fade" id="pastAppo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg" style="--bs-modal-width:1320px">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title">Past Appointments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Table with stripped rows -->
+        <table id="appointmentsTable" class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Patient TC</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Patient Contact</th>
+              <th scope="col">Appointment Date</th>
+              <th scope="col">Appointment Time</th>
+              <th scope="col">Appointment Status</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 0; i < appointments.length; i++) { %>
+              <% if(appointments[i].appoDate < Date.now()) { %>
+              <tr>
+                <th scope="row"><%= appointments[i].patientTC %></th>
+                <td><%= appointments[i].patientName %></td>
+                <td><%= appointments[i].patientPhone%></td>
+                <td><%= appointments[i].appoDate.getDate() %>.<%= appointments[i].appoDate.getMonth()+1 %>.<%= appointments[i].appoDate.getFullYear() %></td>
+                <td><%= appointments[i].appoTime %></td>
+                <td><%= appointments[i].status %></td>
+            </tr>
+        
+            <% } %>
+            <% } %>
+          </tbody>
+        </table>
+        <!-- End Table with stripped rows -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close!</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
