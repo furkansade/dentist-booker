@@ -31,11 +31,13 @@ exports.getDepartmentsPage = async (req, res) => {
 exports.getDoctorsPage = async (req, res) => {
   const doctors = await Doctor.find().populate("department");
   const departments = await Department.find();
+  const appointments = await Appointment.find().populate("doctor").populate("department");
 
   res.status(200).render("admin/doctors", {
     pageName: "doctors",
     doctors,
     departments,
+    appointments,
   });
 };
 exports.getFaqsPage = async (req, res) => {
