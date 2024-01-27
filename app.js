@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 
 const connectToDatabase = require("./helpers/db.js");
 
+
 dotenv.config();
 connectToDatabase();
 
